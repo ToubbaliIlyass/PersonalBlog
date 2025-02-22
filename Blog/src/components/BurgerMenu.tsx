@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { X, Menu } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const BurgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,13 +23,35 @@ const BurgerMenu = () => {
           isOpen ? "translate-x-0" : "-translate-x-full"
         } `}
       >
-        <Button className="mt-[50px]" variant="link">
-          Blog
+        <Link to={"/"} className="block w-full text-center">
+          <Button
+            onClick={() => setIsOpen(false)}
+            className="mt-[50px]"
+            variant="link"
+          >
+            Home
+          </Button>
+        </Link>
+        <Link to={"/Blog"} className="block w-full text-center">
+          <Button onClick={() => setIsOpen(false)} variant="link">
+            Blog
+          </Button>
+        </Link>
+
+        <Button onClick={() => setIsOpen(false)} variant="link">
+          <a href="https://www.youtube.com/@IlyassToubbali" target="blank">
+            Youtube
+          </a>
         </Button>
-        <Button variant="link">Youtube</Button>
-        <Button variant="link">Portfolio</Button>
-        <Button variant="link">About Me</Button>
-        <Button className="bg-[#7dd3fc]">Subscribe Today</Button>
+        <Button onClick={() => setIsOpen(false)} variant="link">
+          Portfolio
+        </Button>
+        <Button onClick={() => setIsOpen(false)} variant="link">
+          About Me
+        </Button>
+        <Button onClick={() => setIsOpen(false)} className="bg-[#7dd3fc]">
+          Subscribe Today
+        </Button>
 
         <button
           className="absolute top-6 right-6 text-gray-700 dark:text-white"

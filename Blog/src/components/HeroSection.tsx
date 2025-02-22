@@ -20,7 +20,7 @@ const HeroSection = () => {
           <h3 className="text-[50px] lg:text-[60px]   font-primary font-semibold text-gray-900">
             This is where my story{" "}
             <span className="font-special relative inline-block">
-              <TypingEffect string="unfolds..." />
+            <TypingEffect strings={["unfolds..."]} />
               <span className=" ">
                 <svg
                   width="250"

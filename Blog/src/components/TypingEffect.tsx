@@ -1,13 +1,13 @@
 import { Typewriter } from "react-simple-typewriter";
 
 interface TypingEffectProps {
-  string: string;
+  strings: string[];
 }
 
-const TypingEffect = ({ string }: TypingEffectProps) => {
+const TypingEffect = ({ strings }: TypingEffectProps) => {
   return (
     <Typewriter
-      words={[string]}
+      words={strings}
       loop={false}
       cursor
       cursorStyle="_"
