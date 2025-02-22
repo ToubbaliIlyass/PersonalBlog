@@ -35,15 +35,15 @@ const Footer = () => {
       className="bg-[#F8F6F2] p-4 rounded-full hover:bg-[#f4a067] transition-colors duration-300 flex items-center justify-center"
       aria-label={social.ariaLabel}
     >
-      <social.icon size={24} className="text-black" />
+      <social.icon className="text-black" />
     </a>
   ));
   return (
     <div className=" container   flex flex-col p-7">
-      <div className="w-1/2 mx-auto flex-row">
+      <div className="w-ful mx-auto max-w-[500px] flex-row items-center justify-center">
         <img src={logo} alt="logo" />
 
-        <div className="p-7 flex w-full justify-between gap-4 items-center">
+        <div className="pt-7  flex  justify-between gap-4 items-center">
           {icons}
         </div>
       </div>
