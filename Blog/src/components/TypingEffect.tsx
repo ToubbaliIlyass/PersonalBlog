@@ -1,4 +1,4 @@
-import Typewriter from "typewriter-effect";
+import { Typewriter } from "react-simple-typewriter";
 
 interface TypingEffectProps {
   string: string;
@@ -7,11 +7,12 @@ interface TypingEffectProps {
 const TypingEffect = ({ string }: TypingEffectProps) => {
   return (
     <Typewriter
-      options={{
-        strings: string,
-        autoStart: true,
-        loop: true,
-      }}
+      words={[string]}
+      loop={false}
+      cursor
+      cursorStyle="_"
+      typeSpeed={100}
+      deleteSpeed={100}
     />
   );
 };

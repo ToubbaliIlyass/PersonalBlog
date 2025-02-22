@@ -1,4 +1,4 @@
-import logo from "../assets/LOGOPNG.png";
+import logo from "../assets/logo.png";
 import { Button } from "@/components/ui/button";
 import BurgerMenu from "./BurgerMenu";
 
@@ -12,7 +12,9 @@ const NavBar = () => {
       />
       {/* For big screens */}
       <div className="hidden  md:flex items-center lg:space-x-8 ">
-        <Button className="" variant="link">Blog</Button>
+        <Button className="" variant="link">
+          Blog
+        </Button>
         <Button variant="link">Youtube</Button>
         <Button variant="link">Portfolio</Button>
         <Button variant="link">About Me</Button>
