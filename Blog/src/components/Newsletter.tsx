@@ -9,35 +9,6 @@ const NewsletterSection = () => {
         <h2 className="text-3xl md:text-5xl font-bold text-gray-900">
           Subscribe to <span className="font-special">MyJourney</span>
         </h2>
-        {/* <p className="text-gray-700 mt-3 text-lg">
-          Join a growing community of more than{" "}
-          <strong>260,000 friendly readers.</strong>
-        </p> */}
-
-        {/* Social Proof */}
-        {/* <div className="flex items-center gap-3 mt-4">
-          <div className="flex -space-x-2">
-            <img
-              src="/avatar1.jpg"
-              alt="User 1"
-              className="w-10 h-10 rounded-full border-2 border-white"
-            />
-            <img
-              src="/avatar2.jpg"
-              alt="User 2"
-              className="w-10 h-10 rounded-full border-2 border-white"
-            />
-            <img
-              src="/avatar3.jpg"
-              alt="User 3"
-              className="w-10 h-10 rounded-full border-2 border-white"
-            />
-          </div>
-          <div className="flex items-center gap-1">
-            <span className="text-yellow-400 text-xl">⭐⭐⭐⭐⭐</span>
-            <p className="text-gray-600 text-sm">200+ reviews</p>
-          </div>
-        </div> */}
       </div>
 
       {/* Right Side (Form) */}

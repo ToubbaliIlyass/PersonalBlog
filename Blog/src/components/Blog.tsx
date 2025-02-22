@@ -18,7 +18,7 @@ const Blog = () => {
 
   return (
     <>
-      <div className="container flex flex-col h-screen  p-7 mx-6 rounded-[40px]  items-center">
+      <div className="container flex flex-col  p-7 mx-6 rounded-[40px]  items-center">
         <h1 className="text-5xl md:text-7xl font-bold font-special p-5">
           The story...
         </h1>

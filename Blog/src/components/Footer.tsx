@@ -39,16 +39,26 @@ const Footer = () => {
     </a>
   ));
   return (
-    <div className=" container   flex flex-col p-7">
-      <div className="w-ful mx-auto max-w-[500px] flex-row items-center justify-center">
-        <img src={logo} alt="logo" />
+    // <div className=" container flex flex-col p-7">
+    //   <div className="w-ful mx-auto max-w-[500px] flex-row items-center justify-center">
+    //     <img src={logo} alt="logo" />
 
-        <div className="pt-7  flex  justify-between gap-4 items-center">
-          {icons}
+    //     <div className="pt-7  flex  justify-between gap-4 items-center">
+    //       {icons}
+    //     </div>
+    //   </div>
+    //   <Newsletter />
+    // </div>
+
+    <footer className="w-full bg-white">
+      <div className="container mx-auto px-4 py-8">
+        <div className="max-w-[500px] mx-auto">
+          <img src={logo} alt="logo" className="w-full" />
+          <div className="pt-7 flex justify-center gap-4">{icons}</div>
         </div>
+        <Newsletter />
       </div>
-      <Newsletter />
-    </div>
+    </footer>
   );
 };
 
