@@ -1,5 +1,6 @@
 import logo from "../assets/logo.png";
 import { FaYoutube, FaInstagram, FaTiktok, FaLinkedinIn } from "react-icons/fa";
+import Newsletter from "./Newsletter";
 const Footer = () => {
   const socialLinks = [
     {
@@ -38,7 +39,7 @@ const Footer = () => {
     </a>
   ));
   return (
-    <div className=" container  h-[1000px] text- flex   p-7">
+    <div className=" container   flex flex-col p-7">
       <div className="w-1/2 mx-auto flex-row">
         <img src={logo} alt="logo" />
 
@@ -46,6 +47,7 @@ const Footer = () => {
           {icons}
         </div>
       </div>
+      <Newsletter />
     </div>
   );
 };
