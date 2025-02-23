@@ -5,6 +5,7 @@ import Home from "./pages/HomePage";
 import Blog from "./pages/BlogPage";
 import NotFound from "./pages/NotFoundPage";
 
+
 const App = () => {
   return (
     <>
