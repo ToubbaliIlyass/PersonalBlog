@@ -14,6 +14,14 @@ export default defineConfig({
       "@": resolve(__dirname, "src"), // Adjusted path
     },
   },
-  base: "/",
+  base: '/',
+  build: {
+    outDir: 'dist',
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      },
+    },
+  },
 });
 

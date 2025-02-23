@@ -1,15 +1,13 @@
 {
-  "framework": "vite",
-  "navigationFallback": {
-    "rewrite": "index.html"
-  },
+  "version": 2,
   "routes": [
+    { "handle": "filesystem" },
+    { "src": "/.*", "dest": "/index.html" }
+  ],
+  "rewrites": [
     {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/.*",
-      "dest": "/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
