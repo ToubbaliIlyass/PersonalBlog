@@ -14,11 +14,6 @@ export default defineConfig({
       "@": resolve(__dirname, "src"), // Adjusted path
     },
   },
-  server: {
-    port: 3000,
-  },
-  build: {
-    outDir: "dist",
-  },
   base: "/",
 });
+
