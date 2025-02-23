@@ -3,7 +3,7 @@ import thumbnail from "../assets/haha.webp";
 const BlogCard = () => {
   return (
     <div
-      className="group  w-[450px] min-w-[450px] h-[625px] bg-[#F8F6F2] rounded-[40px] p-2 hover:bg-[#f4a067] hover:translate-y-[-10px] hover:shadow-lg
+      className="group w-[300px] min-w-[300px]  h-[500px] md:w-[450px] md:min-w-[450px] md:h-[625px] bg-[#F8F6F2] rounded-[40px] p-2 hover:bg-[#f4a067] hover:translate-y-[-10px] hover:shadow-lg
       transition-all  duration-500 ease-in-out  
       "
     >
@@ -16,7 +16,7 @@ const BlogCard = () => {
       </div>
       <div className="p-6 normal-case ">
         <p>January 15, 2025</p>
-        <h1 className="text-5xl mt-7  font-special break-words whitespace-normal">
+        <h1 className="md:text-5xl text-4xl mt-7  font-special break-words whitespace-normal">
           This one thing turned my life upside down!
         </h1>
       </div>
