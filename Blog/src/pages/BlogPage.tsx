@@ -47,7 +47,7 @@ function BlogPage() {
 
   if (loading)
     return (
-      <div className="container  bg-[#F8F6F2] flex   items-center  gap-10 w-full px-7 mx-6">
+      <div className="container  bg-[#F8F6F2] flex flex-col   justify-center  gap-10 w-full px-7 mx-auto font-special">
         <TypingEffect strings={["Loading..."]}></TypingEffect>
       </div>
     );

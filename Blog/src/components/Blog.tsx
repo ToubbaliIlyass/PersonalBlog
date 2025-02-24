@@ -106,7 +106,7 @@ const Blog = () => {
               className=" flex gap-5 pt-5 overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-hide w-full"
             >
               {loading ? (
-                <div className="container flex   items-center  gap-10 w-full px-7 mx-6">
+                <div className="container mx-auto flex   items-center  gap-10 w-full px-7 font-special">
                   <TypingEffect strings={["Loading..."]}></TypingEffect>
                 </div>
               ) : (
