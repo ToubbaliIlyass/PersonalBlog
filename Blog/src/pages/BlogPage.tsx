@@ -1,55 +1,52 @@
+//
 import TypingEffect from "@/components/TypingEffect";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { api } from "../services/api";
+
+
+interface BlogPost {
+  id: string;
+  title: string;
+  created_at: string;
+}
 
 function BlogPage() {
-  const allPosts = [
-    {
-      id: 1,
-      date: "2025-02-20",
-      title:
-        "3-2-1: Four questions for life, how to learn like a child, and seeing things in a generous way",
-    },
-    {
-      id: 2,
-      date: "2025-02-13",
-      title:
-        "3-2-1: On getting what you deserve, the power of flexibility, and how good decisions are made",
-    },
-    {
-      id: 3,
-      date: "2023-02-06",
-      title:
-        "3-2-1: On grief and friendship, the value of reputation, and prevailing when you're in a tight spot",
-    },
-    {
-      id: 4,
-      date: "2024-01-30",
-      title:
-        "3-2-1: On the danger of a good idea, how to do your best work, and a question to inspire action",
-    },
-    {
-      id: 5,
-      date: "2025-01-23",
-      title:
-        "3-2-1: On what it takes to be consistent, how to make a bad situation worse, and noticing small joys",
-    },
-  ];
-
+  const [blogs, setBlogs] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
   const [postsToShow, setPostsToShow] = useState(4);
-  const displayedPosts = allPosts.slice(0, postsToShow);
-  const hasMorePosts = postsToShow < allPosts.length;
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const data = (await api.getAllBlogs()) as BlogPost[];
+        setBlogs(data);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogs();
+  }, []);
+
+  const displayedPosts = blogs.slice(0, postsToShow);
+  const hasMorePosts = postsToShow < blogs.length;
 
   const loadMore = () => {
     setPostsToShow((prev) => prev + 4);
   };
 
   const groupedPosts = displayedPosts.reduce((acc, post) => {
-    const year = new Date(post.date).getFullYear();
+    const year = new Date(post.created_at).getFullYear();
     if (!acc[year]) acc[year] = [];
     acc[year].push(post);
     return acc;
-  }, {} as Record<number, typeof displayedPosts>);
+  }, {} as Record<number, BlogPost[]>);
+
+  if (loading) return <div>Loading...</div>;
 
   return (
     <>
@@ -64,7 +61,7 @@ function BlogPage() {
               "My Chaos",
               "My Truth",
             ]}
-          ></TypingEffect>
+          />
           :
         </h1>
         <div className="max-w-4xl mx-auto p-4">
@@ -75,7 +72,7 @@ function BlogPage() {
                 <h1 className="text-3xl font-bold mb-4">{year}</h1>
                 <div className="space-y-6">
                   {groupedPosts[Number(year)].map((post) => {
-                    const date = new Date(post.date);
+                    const date = new Date(post.created_at);
                     const formattedDate = date
                       .toLocaleDateString("en-US", {
                         month: "short",
@@ -88,12 +85,11 @@ function BlogPage() {
                           {formattedDate}
                         </div>
                         <div className="flex-1">
-                          <a
-                            href="#"
-                            className="text-gray-800 hover:text-[#5dccf1] transition-colors duration-200"
-                          >
-                            {post.title}
-                          </a>
+                          <Link to={`/blog/${post.id}`}>
+                            <h1 className="text-gray-800 hover:text-[#5dccf1] transition-colors duration-200">
+                              {post.title}
+                            </h1>
+                          </Link>
                         </div>
                       </div>
                     );
@@ -106,7 +102,7 @@ function BlogPage() {
               <Button
                 onClick={loadMore}
                 variant="outline"
-                className="w-full py-6 text-white  bg-[#f4a067]"
+                className="w-full py-6 text-white bg-[#f4a067]"
               >
                 Load More Posts
               </Button>

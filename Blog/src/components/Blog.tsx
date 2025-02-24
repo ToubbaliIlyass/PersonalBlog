@@ -1,8 +1,36 @@
 import BlogCard from "./BlogCard";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { api } from "../services/api";
+interface BlogPost {
+  id: string;
+  title: string;
+  content: string;
+  created_at: string;
+}
 
 const Blog = () => {
+  const [blogs, setBlogs] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+  const postsToShow = 6;
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const data = (await api.getAllBlogs()) as BlogPost[];
+        setBlogs(data);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogs();
+  }, []);
+
+  const displayedPosts = blogs.slice(0, postsToShow);
 
   const scrollLeft = () => {
     if (scrollRef.current) {
@@ -76,10 +104,15 @@ const Blog = () => {
               ref={scrollRef}
               className=" flex gap-5 pt-5 overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-hide w-full"
             >
-              <BlogCard />
-              <BlogCard />
-              <BlogCard />
-              <BlogCard />
+              {loading ? (
+                <div>Loading...</div>
+              ) : (
+                displayedPosts.map((post) => (
+                  <Link key={post.id} to={`/blog/${post.id}`}>
+                    <BlogCard post={post} />
+                  </Link>
+                ))
+              )}
             </div>
           </div>
         </div>
