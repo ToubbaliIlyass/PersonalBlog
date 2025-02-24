@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5001/api';
+const API_URL = 'https://personalblog-4kkc.onrender.com';
 
 export const api = {
   getAllBlogs: async () => {
