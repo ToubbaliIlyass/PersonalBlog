@@ -1,6 +1,6 @@
 // const express = require("express");
 // const { Pool } = require("pg");
-// const cors = require("cors");
+const cors = require("cors");
 // require("dotenv").config();
 // const { createClient } = require('@supabase/supabase-js');
 
@@ -14,11 +14,7 @@
 
 // // Middleware
 // // app.use(cors());
-// app.use(
-//   cors({
-//     origin: "https://personal-blog-beryl-seven.vercel.app/#/", // Change this to your frontend URL
-//   })
-// );
+
 // app.use(express.json());
 // // Database configuration
 
@@ -75,6 +71,11 @@ const { createClient } = require("@supabase/supabase-js");
 const app = express();
 app.use(express.json()); // To parse JSON requests
 
+app.use(
+  cors({
+    origin: "https://personal-blog-beryl-seven.vercel.app/#/", // Change this to your frontend URL
+  })
+);
 // Initialize Supabase client
 const supabase = createClient(
   process.env.SUPABASE_URL,
