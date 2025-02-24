@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { api } from "../services/api";
 import ReactMarkdown from "react-markdown";
+import TypingEffect from "@/components/TypingEffect";
 
 interface BlogPost {
   id: string;
@@ -32,7 +33,12 @@ const BlogPost = () => {
     fetchBlog();
   }, [id]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div className="container  bg-[#F8F6F2] flex   items-center  gap-10 w-full px-7 mx-6">
+        <TypingEffect strings={["Loading..."]}></TypingEffect>
+      </div>
+    );
   if (!blog) return <div>Blog not found</div>;
 
   return (

@@ -2,6 +2,7 @@ import BlogCard from "./BlogCard";
 import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../services/api";
+import TypingEffect from "./TypingEffect";
 interface BlogPost {
   id: string;
   title: string;
@@ -105,7 +106,9 @@ const Blog = () => {
               className=" flex gap-5 pt-5 overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-hide w-full"
             >
               {loading ? (
-                <div>Loading...</div>
+                <div className="container flex   items-center  gap-10 w-full px-7 mx-6">
+                  <TypingEffect strings={["Loading..."]}></TypingEffect>
+                </div>
               ) : (
                 displayedPosts.map((post) => (
                   <Link key={post.id} to={`/blog/${post.id}`}>

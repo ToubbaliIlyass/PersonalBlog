@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../services/api";
 
-
 interface BlogPost {
   id: string;
   title: string;
@@ -46,7 +45,12 @@ function BlogPage() {
     return acc;
   }, {} as Record<number, BlogPost[]>);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div className="container  bg-[#F8F6F2] flex   items-center  gap-10 w-full px-7 mx-6">
+        <TypingEffect strings={["Loading..."]}></TypingEffect>
+      </div>
+    );
 
   return (
     <>
