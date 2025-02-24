@@ -42,7 +42,7 @@ const BlogPost = () => {
   if (!blog) return <div>Blog not found</div>;
 
   return (
-    <article className="container mx-auto p-6  rounded-b-[40px] flex  items-center bg-[#F8F6F2]">
+    <article className="container mx-auto p-6  rounded-b-[40px] flex flex-col  items-center bg-[#F8F6F2]">
       <h1 className="text-3xl font-bold mb-[30px]">{blog.title}</h1>
       <div className="text-left  w-full max-w-[700px] break-words">
         <ReactMarkdown>{blog.content}</ReactMarkdown>
