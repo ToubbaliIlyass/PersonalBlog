@@ -84,6 +84,26 @@ app.post("/api/blogs", async (req, res) => {
   }
 });
 
+app.post("/api/email", async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    // Insert a new blog into the 'blogs' table
+    const { data, error } = await supabase
+      .from("emails") // The table name
+      .insert([{ email }]) // Insert values
+      .single(); // Return only one row
+
+    if (error) {
+      throw error;
+    }
+
+    res.status(201).json(data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Start server
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, async () => {

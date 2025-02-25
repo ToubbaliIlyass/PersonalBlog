@@ -16,5 +16,9 @@ export const api = {
   createBlog: async (blogData: { title: string; content: string; slug: string }) => {
     const response = await axios.post(`${API_URL}/api/blogs`, blogData);
     return response.data;
-  }
+  },
+  addemail: async (email: string) => {
+    const response = await axios.post(`${API_URL}/api/email`, { email });
+    return response.data;
+  },  
 };
