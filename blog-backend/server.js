@@ -87,10 +87,11 @@ app.post("/api/blogs", async (req, res) => {
 app.post("/api/email", async (req, res) => {
   try {
     const { email } = req.body;
+    console.log(email);
 
     // Insert a new blog into the 'blogs' table
     const { data, error } = await supabase
-      .from("emails") // The table name
+      .from("email") // The table name
       .insert([{ email }]) // Insert values
       .single(); // Return only one row
 

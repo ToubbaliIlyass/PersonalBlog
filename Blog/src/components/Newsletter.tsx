@@ -29,7 +29,7 @@ const NewsletterSection = () => {
 
       // Clear input field
       emailInput.value = "";
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+       
     } catch (error) {
       alert("Failed to subscribe. Please try again.");
       console.error(error);
