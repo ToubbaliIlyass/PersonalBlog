@@ -29,10 +29,15 @@ const NewsletterSection = () => {
 
       // Clear input field
       emailInput.value = "";
-       
     } catch (error) {
-      alert("Failed to subscribe. Please try again.");
-      console.error(error);
+      // Ensure error is treated as an object with a response property (type assertion)
+      const err = error as { response?: { data?: { error?: string } } };
+
+      // Show the error message
+      const errorMessage =
+        err.response?.data?.error || "Failed to subscribe. Please try again.";
+      alert(errorMessage);
+      console.error(err);
     }
   };
 
