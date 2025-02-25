@@ -87,21 +87,20 @@ app.post("/api/blogs", async (req, res) => {
 app.post("/api/email", async (req, res) => {
   try {
     const { email } = req.body;
-    console.log(email);
 
-    // Insert a new blog into the 'blogs' table
+    // Insert the email into the 'emails' table
     const { data, error } = await supabase
-      .from("email") // The table name
-      .insert([{ email }]) // Insert values
-      .single(); // Return only one row
+      .from("emails")
+      .insert([{ email }])
+      .single(); // Insert one row and return the inserted data
 
     if (error) {
       throw error;
     }
 
-    res.status(201).json(data);
+    res.status(201).json(data); // Send back the inserted data
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ error: error.message }); // Handle any server errors
   }
 });
 
