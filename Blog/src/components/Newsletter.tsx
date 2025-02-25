@@ -1,8 +1,11 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { api } from "@/services/api";
+import { useAlert } from "../context/AlertContext";
 
 const NewsletterSection = () => {
+  const { showAlert } = useAlert();
+
   const handlesubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const emailInput = e.currentTarget.elements.namedItem(
@@ -12,12 +15,12 @@ const NewsletterSection = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!email) {
-      alert("Please enter your email");
+      showAlert("Please enter your email", "error");
       return;
     }
 
     if (!emailRegex.test(email)) {
-      alert("Please enter a valid email address");
+      showAlert("Please enter a valid email address", "error");
       return;
     }
 
@@ -25,7 +28,7 @@ const NewsletterSection = () => {
       await api.addemail(email);
 
       // Show success alert
-      alert("You have been subscribed successfully!");
+      showAlert("You have been subscribed successfully!", "success");
 
       // Clear input field
       emailInput.value = "";
@@ -36,7 +39,7 @@ const NewsletterSection = () => {
       // Show the error message
       const errorMessage =
         err.response?.data?.error || "Failed to subscribe. Please try again.";
-      alert(errorMessage);
+      showAlert(errorMessage, "error");
       console.error(err);
     }
   };
@@ -76,7 +79,7 @@ const NewsletterSection = () => {
         </form>
 
         <p className="text-xs text-gray-500 mt-3">
-          By submitting this form, you’ll be signed up to my free newsletter.
+          By submitting this form, you'll be signed up to my free newsletter.
           See our{" "}
           <a href="#" className="text-blue-500 underline">
             privacy policy

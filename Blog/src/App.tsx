@@ -5,11 +5,14 @@ import Home from "./pages/HomePage";
 import Blog from "./pages/BlogPage";
 import NotFound from "./pages/NotFoundPage";
 import BlogPost from "./pages/BlogPostPage.tsx";
+import { AlertProvider } from "./context/AlertContext";
+import { AlertNotification } from "./components/Alert";
 
 const App = () => {
   return (
-    <>
+    <AlertProvider>
       <NavBar />
+      <AlertNotification />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -20,7 +23,7 @@ const App = () => {
         </Routes>
       </main>
       <Footer />
-    </>
+    </AlertProvider>
   );
 };
 
