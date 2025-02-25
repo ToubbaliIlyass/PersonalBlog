@@ -8,7 +8,10 @@ app.use(express.json()); // To parse JSON requests
 
 app.use(
   cors({
-    origin: "https://personal-blog-beryl-seven.vercel.app", // Change this to your frontend URL
+    origin: [
+      "https://personal-blog-beryl-seven.vercel.app", // Deployed frontend
+      "http://localhost:3000",
+    ], // Change this to your frontend URL
   })
 );
 // Initialize Supabase client
