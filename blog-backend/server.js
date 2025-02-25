@@ -83,10 +83,24 @@ app.post("/api/blogs", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
 app.post("/api/email", async (req, res) => {
   try {
     const { email } = req.body;
+
+    // Check if the email already exists in the 'emails' table
+    const { data: existingEmail, error: checkError } = await supabase
+      .from("emails")
+      .select("email")
+      .eq("email", email)
+      .single(); // Only need one result
+
+    if (checkError) {
+      throw checkError;
+    }
+
+    if (existingEmail) {
+      return res.status(400).json({ error: "Email already exists" }); // Email already in the database
+    }
 
     // Insert the email into the 'emails' table
     const { data, error } = await supabase
