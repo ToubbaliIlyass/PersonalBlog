@@ -1,11 +1,32 @@
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { X, Menu } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const BurgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen(!isOpen);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handlePortfolioClick = () => {
+    if (location.pathname === "/") {
+      // Scroll to the Portfolio section if already on homepage
+      document
+        .getElementById("portfolio-section")
+        ?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // Navigate to homepage with hash and let browser handle scrolling
+      navigate("/", { replace: false });
+
+      // Delay scrolling slightly to ensure the homepage renders first
+      setTimeout(() => {
+        document
+          .getElementById("portfolio-section")
+          ?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }
+  };
 
   return (
     <div className="relative">
@@ -38,12 +59,24 @@ const BurgerMenu = () => {
           </Button>
         </Link>
 
-        <Button onClick={() => setIsOpen(false)} variant="link">
+        <Button
+          onClick={() => {
+            setIsOpen(false);
+            handlePortfolioClick();
+          }}
+          variant="link"
+        >
           <a href="https://www.youtube.com/@IlyassToubbali" target="blank">
             Youtube
           </a>
         </Button>
-        <Button onClick={() => setIsOpen(false)} variant="link">
+        <Button
+          onClick={() => {
+            handlePortfolioClick();
+            setIsOpen(false);
+          }}
+          variant="link"
+        >
           Portfolio
         </Button>
         <Button onClick={() => setIsOpen(false)} variant="link">

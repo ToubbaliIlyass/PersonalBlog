@@ -1,9 +1,30 @@
 import logo from "../assets/logo.png";
 import { Button } from "@/components/ui/button";
 import BurgerMenu from "./BurgerMenu";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const NavBar = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handlePortfolioClick = () => {
+    if (location.pathname === "/") {
+      // Scroll to the Portfolio section if already on homepage
+      document
+        .getElementById("portfolio-section")
+        ?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // Navigate to homepage with hash and let browser handle scrolling
+      navigate("/", { replace: false });
+
+      // Delay scrolling slightly to ensure the homepage renders first
+      setTimeout(() => {
+        document
+          .getElementById("portfolio-section")
+          ?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }
+  };
   return (
     <nav className=" container  flex items-center justify-between p-7 mx-auto  mt-5 bg-[#F8F6F2] rounded-t-[40px]">
       <Link to={"/"}>
@@ -25,7 +46,9 @@ const NavBar = () => {
             Youtube
           </a>
         </Button>
-        <Button variant="link">Portfolio</Button>
+        <Button onClick={handlePortfolioClick} variant="link">
+          Portfolio
+        </Button>
         <Button variant="link">About Me</Button>
         <Button className="bg-[#f4a067] shadow-lg">Subscribe Today</Button>
       </div>
