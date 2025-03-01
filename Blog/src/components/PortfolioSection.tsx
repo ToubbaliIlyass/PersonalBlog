@@ -88,7 +88,10 @@ const PortfolioSection: React.FC<PortfolioSectionProps> = ({ id }) => {
 
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
         {skills.map((skill) => (
-          <div className="flex  items-center p-4 bg-gray-100 rounded-lg min-w-300px h-[100px] hover:bg-[#5dccf1] hover:shadow-lg group transition duration-300 ">
+          <div
+            key={skill.name}
+            className="flex  items-center p-4 bg-gray-100 rounded-lg min-w-300px h-[100px] hover:bg-[#5dccf1] hover:shadow-lg group transition duration-300 "
+          >
             <skill.Icon width="40px" />
             <div className="ml-4 ">
               <h3 className="text-2xl font-semibold ">{skill.name}</h3>

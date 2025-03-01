@@ -19,17 +19,26 @@ export const api = {
     const { token } = useAuth();
     if (!token) return;
   
-    const response = await fetch(`${API_URL}/api/blogs`, {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ title, content, status, slug }),
-    });
+    try {
+      const response = await fetch(`${API_URL}/api/blogs`, {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ title, content, status, slug }),
+      });
   
-    if (!response.ok) {
-      throw new Error("Failed to create blog");
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Error:", errorData);
+        throw new Error(errorData.message || "Failed to create blog");
+      }
+  
+      return await response.json(); // Return the created blog data
+    } catch (error) {
+      console.error("Request failed:", error);
+      throw error;
     }
   },
   addemail: async (email: string) => {
