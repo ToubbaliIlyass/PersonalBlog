@@ -7,7 +7,7 @@ const HeroSection = () => {
   return (
     <>
       {/* <div className="container h-[1000px] flex flex-col md:flex-row  rounded-b-[40px] bg-[#F8F6F2] p-5 "> */}
-      <div className="container  bg-[#F8F6F2] flex flex-col md:flex-row items-center  gap-10 w-full px-7 mx-6">
+      <div className="container   flex flex-col md:flex-row items-center  gap-10 w-full px-7 mx-6">
         <div className="w-full md:w-1/2 flex justify-center">
           <img
             src={hero}
@@ -49,7 +49,7 @@ const HeroSection = () => {
         </div>
       </div>
       {/* </div> */}
-      <div className="container rounded-b-[40px] bg-[#F8F6F2] flex justify-center md:flex-row items-center  gap-10 w-full  px-7 mx-6 p-8">
+      <div className="container rounded-b-[40px]  flex justify-center md:flex-row items-center  gap-10 w-full  px-7 mx-6 p-8">
         <Newsletter />
       </div>
     </>

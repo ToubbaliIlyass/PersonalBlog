@@ -35,7 +35,7 @@ const BlogPost = () => {
 
   if (loading)
     return (
-      <div className="container  bg-[#F8F6F2] flex flex-col   justify-center  gap-10 w-full px-7 mx-auto font-special">
+      <div className="container 'flex h-[200px] justify-center  gap-10 w-full px-7 mx-auto font-special">
         <TypingEffect strings={["Loading..."]}></TypingEffect>
       </div>
     );

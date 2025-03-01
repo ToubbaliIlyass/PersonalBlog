@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../services/api";
+import { useAuth } from "../context/AuthContext";
 
 interface BlogPost {
   id: string;
@@ -12,6 +13,8 @@ interface BlogPost {
 }
 
 function BlogPage() {
+  const { user } = useAuth();
+
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [postsToShow, setPostsToShow] = useState(4);
@@ -47,7 +50,7 @@ function BlogPage() {
 
   if (loading)
     return (
-      <div className="container  bg-[#F8F6F2] flex  items-center gap-10 w-full px-7 mx-auto font-special">
+      <div className="container   flex h-[200px] justify-center gap-10 w-full px-7 mx-auto font-special">
         <TypingEffect strings={["Loading..."]}></TypingEffect>
       </div>
     );
@@ -68,6 +71,20 @@ function BlogPage() {
           />
           :
         </h1>
+
+        {/* Add New Blog Button */}
+
+        {user && (
+          <>
+            <div className="flex justify-center max-w-4xl mx-auto p-4">
+              <Link to={"/create-blog"}>
+                <Button className="bg-[#f4a067] w-full">Add New Blog</Button>
+              </Link>
+            </div>
+          </>
+        )}
+
+        {/* Blogs  */}
         <div className="max-w-4xl mx-auto p-4">
           {Object.keys(groupedPosts)
             .sort((a, b) => Number(b) - Number(a))

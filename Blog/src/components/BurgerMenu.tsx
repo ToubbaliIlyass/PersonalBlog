@@ -2,8 +2,11 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import { X, Menu } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const BurgerMenu = () => {
+  const { user } = useAuth();
+  const { logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen(!isOpen);
   const location = useLocation();
@@ -32,10 +35,10 @@ const BurgerMenu = () => {
     <div className="relative">
       {/* Burger Icon */}
       <button
-        className="md:hidden p-2 text-gray-700 focus:outline-none bg-[#fcd36b] rounded-lg "
+        className="lg:hidden p-2 text-gray-700 focus:outline-none bg-[#fcd36b] rounded-lg "
         onClick={toggleMenu}
       >
-        {isOpen ? <X size={30} /> : <Menu size={30} />}
+        {isOpen ? <X size={20} /> : <Menu size={20} />}
       </button>
 
       {/* Menu Items */}
@@ -82,7 +85,33 @@ const BurgerMenu = () => {
         <Button onClick={() => setIsOpen(false)} variant="link">
           About Me
         </Button>
-        <Button onClick={() => setIsOpen(false)} className="bg-[#7dd3fc]">
+
+        {user ? (
+          <Button
+            variant="link"
+            onClick={() => {
+              logout();
+              setIsOpen(false);
+            }}
+          >
+            Log Out
+          </Button>
+        ) : (
+          <Button
+            onClick={() => {
+              setIsOpen(false);
+              navigate("/login");
+            }}
+            variant="link"
+          >
+            Login
+          </Button>
+        )}
+
+        <Button
+          onClick={() => setIsOpen(false)}
+          className="bg-[#7dd3fc] sm:hidden"
+        >
           Subscribe Today
         </Button>
 

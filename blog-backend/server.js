@@ -64,25 +64,64 @@ app.get("/api/blogs/:id", async (req, res) => {
 });
 
 // POST a new blog
-app.post("/api/blogs", async (req, res) => {
+// app.post("/api/blogs", async (req, res) => {
+//   try {
+//     const { title, content, slug } = req.body;
+
+//     // Insert a new blog into the 'blogs' table
+//     const { data, error } = await supabase
+//       .from("blogs") // The table name
+//       .insert([{ title, content, slug }]) // Insert values
+//       .single(); // Return only one row
+
+//     if (error) {
+//       throw error;
+//     }
+
+//     res.status(201).json(data);
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// });
+
+const authenticate = async (req, res, next) => {
   try {
-    const { title, content, slug } = req.body;
+    const token = req.headers.authorization?.split(" ")[1]; // Get token from "Bearer <token>"
+    if (!token) return res.status(401).json({ error: "Unauthorized" });
 
-    // Insert a new blog into the 'blogs' table
-    const { data, error } = await supabase
-      .from("blogs") // The table name
-      .insert([{ title, content, slug }]) // Insert values
-      .single(); // Return only one row
+    // Verify token with Supabase
+    const { data: user, error } = await supabase.auth.getUser(token);
+    if (error || !user) return res.status(401).json({ error: "Invalid token" });
 
-    if (error) {
-      throw error;
+    // Check if user is the admin
+    if (user.user.id !== process.env.ADMIN_USER_ID) {
+      return res.status(403).json({ error: "Forbidden: Not authorized" });
     }
 
+    req.user = user.user; // Attach user to request
+    next(); // Proceed to next middleware
+  } catch (error) {
+    res.status(500).json({ error: "Authentication error" });
+  }
+};
+
+// Protect the blog creation route
+app.post("/api/blogs", authenticate, async (req, res) => {
+  try {
+    const { title, content, status, slug } = req.body;
+
+    const { data, error } = await supabase
+      .from("blogs")
+      .insert([{ title, content, slug, status, user_id: req.user.id }]) // Associate blog with user
+      .single();
+
+    if (error) throw error;
     res.status(201).json(data);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
+
 app.post("/api/email", async (req, res) => {
   try {
     const { email } = req.body;
