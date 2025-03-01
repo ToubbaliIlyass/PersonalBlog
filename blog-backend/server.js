@@ -9,7 +9,7 @@ app.use(express.json()); // To parse JSON requests
 app.use(
   cors({
     origin: [
-      "https://personal-blog-beryl-seven.vercel.app", // Deployed frontend
+      "https://personal-blog-t2usi8k7v-toubbaliilyass-projects.vercel.app/#/", // Deployed frontend
       "http://localhost:3000",
     ], // Change this to your frontend URL
   })

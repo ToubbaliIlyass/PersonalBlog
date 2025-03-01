@@ -10,6 +10,7 @@ interface BlogPost {
   id: string;
   title: string;
   created_at: string;
+  status: string
 }
 
 function BlogPage() {
@@ -111,6 +112,7 @@ function BlogPage() {
                               {post.title}
                             </h1>
                           </Link>
+                          <p>{post.status}</p>
                         </div>
                       </div>
                     );
@@ -118,6 +120,9 @@ function BlogPage() {
                 </div>
               </div>
             ))}
+
+
+
           {hasMorePosts && (
             <div className="mt-8">
               <Button

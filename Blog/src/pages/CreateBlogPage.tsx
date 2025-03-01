@@ -63,7 +63,6 @@ const CreateBlogPage = () => {
   };
 
   const previewmode = () => {
-    console.log(content);
     return (
       <article className="container mx-auto mt-5  rounded-b-[40px] flex flex-col  items-center">
         <h1 className="text-3xl font-bold mb-[30px]">{title}</h1>
