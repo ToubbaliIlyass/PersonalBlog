@@ -1,6 +1,6 @@
 // // import video from "../assets/Blog_Video2_compressed.mp4";
 import TypingEffect from "./TypingEffect";
-import hero from "../assets/hero.png";
+import hero from "../assets/hero_web.png";
 import Newsletter from "./Newsletter";
 
 const HeroSection = () => {
@@ -20,7 +20,7 @@ const HeroSection = () => {
           <h3 className="text-[50px] lg:text-[60px]   font-primary font-semibold text-gray-900">
             This is where my story{" "}
             <span className="font-special relative inline-block">
-            <TypingEffect strings={["unfolds..."]} />
+              <TypingEffect strings={["unfolds..."]} />
               <span className=" ">
                 <svg
                   width="250"

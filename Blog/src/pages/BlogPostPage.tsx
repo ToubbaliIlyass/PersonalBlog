@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { api } from "../services/api";
 import ReactMarkdown from "react-markdown";
 import TypingEffect from "@/components/TypingEffect";
+import remarkGfm from "remark-gfm";
 
 interface BlogPost {
   id: string;
@@ -42,12 +43,23 @@ const BlogPost = () => {
   if (!blog) return <div>Blog not found</div>;
 
   return (
-    <article className="container mx-auto p-6  rounded-b-[40px] flex flex-col  items-center bg-[#F8F6F2]">
+    // <article className="container mx-auto p-6  rounded-b-[40px] flex flex-col  items-center ">
+    //   <h1 className="text-3xl font-bold mb-[30px]">{blog.title}</h1>
+    //   <div className="text-left  w-full max-w-[700px] break-words">
+    //     <ReactMarkdown>{blog.content}</ReactMarkdown>
+    //   </div>
+    //   <div>Posted on: {new Date(blog.created_at).toLocaleDateString()}</div>
+    // </article>
+    <article className="container mx-auto mt-5  rounded-b-[40px] flex flex-col  items-center">
       <h1 className="text-3xl font-bold mb-[30px]">{blog.title}</h1>
-      <div className="text-left  w-full max-w-[700px] break-words">
-        <ReactMarkdown>{blog.content}</ReactMarkdown>
+      <div className="prose prose-lg text-left  w-full max-w-[700px] break-words">
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {blog.content}
+        </ReactMarkdown>
       </div>
-      <div>Posted on: {new Date(blog.created_at).toLocaleDateString()}</div>
+      <div className="mt-5">
+        Posted on: {new Date(blog.created_at).toLocaleDateString()}
+      </div>
     </article>
   );
 };

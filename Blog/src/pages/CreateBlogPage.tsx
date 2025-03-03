@@ -5,6 +5,7 @@ import MDEditor from "@uiw/react-md-editor";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { api } from "@/services/api";
+import { useAuth } from "@/context/AuthContext";
 
 function createSlug(title: string) {
   return title
@@ -18,18 +19,25 @@ const CreateBlogPage = () => {
   const [inPreviewMode, setInPreviewMode] = useState(false);
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
+  const { token } = useAuth();
 
-  const handlesubmitblog = async (status: string) => {
+  async function handlesubmitblog(status: string) {
+    if (!token) {
+      alert("You must be logged in to create a blog");
+      return;
+    }
+
     const slug = createSlug(title);
+    console.log(slug, title, status);
 
     try {
-      await api.createBlog(title, content, status, slug);
+      await api.createBlog(title, content, status, slug, token);
       alert("Blog created successfully");
     } catch (error) {
       console.error("Error creating blog:", error);
       alert("Failed to create blog");
     }
-  };
+  }
 
   const writingmode = () => {
     return (
@@ -53,8 +61,8 @@ const CreateBlogPage = () => {
         </form>
 
         <div className="w-full flex justify-center gap-5 mt-5">
-          <Button onSubmit={() => handlesubmitblog("Draft")}>Save Draft</Button>
-          <Button onSubmit={() => handlesubmitblog("Published")} className="">
+          <Button onClick={() => handlesubmitblog("Draft")}>Save Draft</Button>
+          <Button onClick={() => handlesubmitblog("Published")} className="">
             Publish
           </Button>
         </div>

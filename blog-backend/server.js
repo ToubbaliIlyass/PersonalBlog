@@ -63,27 +63,6 @@ app.get("/api/blogs/:id", async (req, res) => {
   }
 });
 
-// POST a new blog
-// app.post("/api/blogs", async (req, res) => {
-//   try {
-//     const { title, content, slug } = req.body;
-
-//     // Insert a new blog into the 'blogs' table
-//     const { data, error } = await supabase
-//       .from("blogs") // The table name
-//       .insert([{ title, content, slug }]) // Insert values
-//       .single(); // Return only one row
-
-//     if (error) {
-//       throw error;
-//     }
-
-//     res.status(201).json(data);
-//   } catch (error) {
-//     res.status(500).json({ error: error.message });
-//   }
-// });
-
 const authenticate = async (req, res, next) => {
   try {
     const token = req.headers.authorization?.split(" ")[1]; // Get token from "Bearer <token>"
@@ -108,6 +87,8 @@ const authenticate = async (req, res, next) => {
 // Protect the blog creation route
 app.post("/api/blogs", authenticate, async (req, res) => {
   try {
+    console.log("Received data:", req.body);
+    console.log("Authenticated user:", req.user);
     const { title, content, status, slug } = req.body;
 
     const { data, error } = await supabase

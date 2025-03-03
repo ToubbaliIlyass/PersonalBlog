@@ -10,7 +10,7 @@ interface BlogPost {
   id: string;
   title: string;
   created_at: string;
-  status: string
+  status: string;
 }
 
 function BlogPage() {
@@ -42,7 +42,11 @@ function BlogPage() {
     setPostsToShow((prev) => prev + 4);
   };
 
-  const groupedPosts = displayedPosts.reduce((acc, post) => {
+  const filteredPosts = user
+    ? displayedPosts
+    : displayedPosts.filter((post) => post.status === "Published");
+
+  const groupedPosts = filteredPosts.reduce((acc, post) => {
     const year = new Date(post.created_at).getFullYear();
     if (!acc[year]) acc[year] = [];
     acc[year].push(post);
@@ -55,10 +59,9 @@ function BlogPage() {
         <TypingEffect strings={["Loading..."]}></TypingEffect>
       </div>
     );
-
   return (
     <>
-      <div className="container mx-auto bg-[#F8F6F2] rounded-b-[40px] p-6">
+      <div className="container mx-auto rounded-b-[40px] p-6">
         <h1 className="text-4xl font-bold text-center font-special pt-6 pb-6">
           The Blog,{" "}
           <TypingEffect
@@ -74,16 +77,6 @@ function BlogPage() {
         </h1>
 
         {/* Add New Blog Button */}
-
-        {user && (
-          <>
-            <div className="flex justify-center max-w-4xl mx-auto p-4">
-              <Link to={"/create-blog"}>
-                <Button className="bg-[#f4a067] w-full">Add New Blog</Button>
-              </Link>
-            </div>
-          </>
-        )}
 
         {/* Blogs  */}
         <div className="max-w-4xl mx-auto p-4">
@@ -102,17 +95,34 @@ function BlogPage() {
                       })
                       .toUpperCase();
                     return (
-                      <div key={post.id} className="flex gap-8 group">
+                      <div
+                        key={post.id}
+                        className="flex gap-8 group items-center"
+                      >
                         <div className="w-20 text-gray-500 uppercase text-sm">
                           {formattedDate}
                         </div>
-                        <div className="flex-1">
+                        <div className="flex justify-between items-center w-full">
                           <Link to={`/blog/${post.id}`}>
                             <h1 className="text-gray-800 hover:text-[#5dccf1] transition-colors duration-200">
                               {post.title}
                             </h1>
                           </Link>
-                          <p>{post.status}</p>
+
+                          {user && (
+                            <div className="flex gap-4 items-center ">
+                              {post.status === "Draft" ? (
+                                <span className=" text-gray-500">Draft</span>
+                              ) : (
+                                <span className="text-xs text-green-500">
+                                  Published
+                                </span>
+                              )}
+                              <Button className="text-[16px]" variant="ghost">
+                                Edit Post
+                              </Button>
+                            </div>
+                          )}
                         </div>
                       </div>
                     );
@@ -120,8 +130,6 @@ function BlogPage() {
                 </div>
               </div>
             ))}
-
-
 
           {hasMorePosts && (
             <div className="mt-8">
@@ -133,6 +141,16 @@ function BlogPage() {
                 Load More Posts
               </Button>
             </div>
+          )}
+
+          {user && (
+            <>
+              <div className="flex justify-center max-w-4xl mx-auto p-4">
+                <Link to={"/create-blog"}>
+                  <Button className="bg-[#f4a067] w-full">Add New Blog</Button>
+                </Link>
+              </div>
+            </>
           )}
         </div>
       </div>

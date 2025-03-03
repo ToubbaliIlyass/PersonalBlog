@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useAuth } from "../context/AuthContext";
 
 const API_URL = 'https://personalblog-4kkc.onrender.com';
 
@@ -14,11 +13,10 @@ export const api = {
     return response.data;
   },
 
-  createBlog: async (title: string, content: string, status: string, slug: string) => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { token } = useAuth();
+  createBlog: async (title: string, content: string, status: string, slug: string, token: string) => {
+    
     if (!token) return;
-  
+    console.log("Sending request with:", { title, content, status, slug, token });
     try {
       const response = await fetch(`${API_URL}/api/blogs`, {
         method: "POST",
@@ -28,6 +26,7 @@ export const api = {
         },
         body: JSON.stringify({ title, content, status, slug }),
       });
+      console.log("Response status:", response.status);
   
       if (!response.ok) {
         const errorData = await response.json();
