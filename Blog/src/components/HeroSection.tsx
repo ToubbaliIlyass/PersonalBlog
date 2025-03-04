@@ -12,7 +12,7 @@ const HeroSection = () => {
           <img
             src={hero}
             alt=""
-            className="w-[80%] md:w-[100%] max-w-sm md:max-w-md rounded-xl"
+            className="w-[100%] md:w-[100%] max-w-sm md:max-w-md rounded-xl"
           />
         </div>
 
