@@ -26,7 +26,7 @@ export const api = {
         },
         body: JSON.stringify({ title, content, status, slug }),
       });
-      console.log("Response status:", response.status);
+      console.log("Response status:", response.status, await response.text());
   
       if (!response.ok) {
         const errorData = await response.json();

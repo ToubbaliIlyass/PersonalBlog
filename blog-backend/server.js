@@ -95,6 +95,7 @@ app.post("/api/blogs", authenticate, async (req, res) => {
       .from("blogs")
       .insert([{ title, content, slug, status }]) // Associate blog with user
       .single();
+    console.log("Supabase response:", { data, error });
 
     if (error) throw error;
     res.status(201).json(data);
