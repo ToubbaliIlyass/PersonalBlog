@@ -31,11 +31,19 @@ const CreateBlogPage = () => {
     console.log(slug, title, status);
 
     try {
-      await api.createBlog(title, content, status, slug, token);
-      alert("Blog created successfully");
+      const result = await api.createBlog(title, content, status, slug, token);
+      console.log("Blog creation result:", result);
+      alert(`Blog ${status.toLowerCase()} successfully`);
     } catch (error) {
-      console.error("Error creating blog:", error);
-      alert("Failed to create blog");
+      if (error instanceof Error) {
+        console.error("Error creating blog:", error.message);
+        alert(`Failed to ${status.toLowerCase()} blog: ${error.message}`);
+      } else {
+        console.error("Unexpected error:", error);
+        alert(
+          `Failed to ${status.toLowerCase()} blog: An unexpected error occurred.`
+        );
+      }
     }
   }
 

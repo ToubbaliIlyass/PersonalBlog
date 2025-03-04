@@ -34,7 +34,14 @@ export const api = {
         throw new Error(errorData.message || "Failed to create blog");
       }
   
-      return await response.json(); // Return the created blog data
+    //   return await response.json(); // Return the created blog data
+    // } catch (error) {
+    //   console.error("Request failed:", error);
+    //   throw error;
+    // }
+    const data = await response.json(); // Parse once
+      console.log("Response data:", data); // Log the parsed data
+      return data; // Return the created blog data
     } catch (error) {
       console.error("Request failed:", error);
       throw error;

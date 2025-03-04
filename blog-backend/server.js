@@ -93,7 +93,8 @@ app.post("/api/blogs", authenticate, async (req, res) => {
 
     const { data, error } = await supabase
       .from("blogs")
-      .insert([{ title, content, slug, status }]) // Associate blog with user
+      .insert([{ title, content, slug, status }])
+      .select() // Associate blog with user
       .single();
     console.log("Supabase response:", { data, error });
 
