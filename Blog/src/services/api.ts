@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'https://personalblog-4kkc.onrender.com';
+const API_URL = 'https://personalblog-production-1b15.up.railway.app';
+
 
 export const api = {
   getAllBlogs: async () => {
@@ -18,7 +19,7 @@ export const api = {
     if (!token) return;
     console.log("Sending request with:", { title, content, status, slug, token });
     try {
-      const response = await fetch(`${API_URL}/api/blogs`, {
+      const response = await axios.post(`${API_URL}/api/blogs`, {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${token}`,
@@ -28,18 +29,10 @@ export const api = {
       });
       console.log("Response status:", response.status);
   
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error("Error:", errorData);
-        throw new Error(errorData.message || "Failed to create blog");
+    }catch (error) {
+        console.error('Error creating blog:', error);
+        throw error;
       }
-    const data = await response.json(); // Parse once
-      console.log("Response data:", data); // Log the parsed data
-      return data; // Return the created blog data
-    } catch (error) {
-      console.error("Request failed:", error);
-      throw error;
-    }
   },
   addemail: async (email: string) => {
     const response = await axios.post(`${API_URL}/api/email`, { email });

@@ -9,9 +9,13 @@ app.use(express.json()); // To parse JSON requests
 app.use(
   cors({
     origin: [
-      "https://personal-blog-t2usi8k7v-toubbaliilyass-projects.vercel.app", // Deployed frontend
+      "https://personal-blog-t2usi8k7v-toubbaliilyass-projects.vercel.app",
       "http://localhost:3000",
-    ], // Change this to your frontend URL
+      "https://personalblog-production-1b15.up.railway.app", // Add your Railway URL
+    ],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"], // Add allowed headers
   })
 );
 // Initialize Supabase client
