@@ -50,7 +50,7 @@ const Footer = () => {
     //   <Newsletter />
     // </div>
 
-    <footer className="w-full bg-white">
+    <footer className="w-full ">
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-[500px] mx-auto">
           <img src={logo} alt="logo" className="w-full" />

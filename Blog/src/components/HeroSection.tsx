@@ -1,22 +1,14 @@
 // // import video from "../assets/Blog_Video2_compressed.mp4";
 import TypingEffect from "./TypingEffect";
-import hero from "../assets/hero_web.png";
 import Newsletter from "./Newsletter";
+// import HoverReveal from "./HoverReveal";
 
 const HeroSection = () => {
   return (
     <>
       {/* <div className="container h-[1000px] flex flex-col md:flex-row  rounded-b-[40px] bg-[#F8F6F2] p-5 "> */}
       <div className="container   flex flex-col md:flex-row items-center  gap-10 w-full px-7 mx-6">
-        <div className="w-full md:w-1/2 flex justify-center">
-          <img
-            src={hero}
-            alt=""
-            className="w-[100%] md:w-[100%] max-w-sm md:max-w-md rounded-xl"
-          />
-        </div>
-
-        <div className="w-full md:w-1/2 text-center md:text-left">
+        <div className="w-full max-w-[800px] mx-auto  text-center mt-10">
           <h3 className="text-[50px] lg:text-[60px]   font-primary font-semibold text-gray-900">
             This is where my story{" "}
             <span className="font-special relative inline-block">
@@ -38,7 +30,7 @@ const HeroSection = () => {
               </span>
             </span>
           </h3>
-          <p className="text-[30px]">
+          <p className=" mt-10 text-[30px]">
             I'm Ilyass. I'm A CompSci Student,
             <span className="font-bold underline hover:no-underline ">
               {" "}
