@@ -6,6 +6,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { api } from "@/services/api";
 import { useAuth } from "@/context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function createSlug(title: string) {
   return title
@@ -20,6 +21,11 @@ const CreateBlogPage = () => {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const { token } = useAuth();
+  const navigate = useNavigate();
+
+  function discard() {
+    navigate("/blog");
+  }
 
   async function handlesubmitblog(status: string) {
     if (!token) {
@@ -70,9 +76,8 @@ const CreateBlogPage = () => {
 
         <div className="w-full flex justify-center gap-5 mt-5">
           <Button onClick={() => handlesubmitblog("Draft")}>Save Draft</Button>
-          <Button onClick={() => handlesubmitblog("Published")} className="">
-            Publish
-          </Button>
+          <Button onClick={() => handlesubmitblog("Published")}>Publish</Button>
+          <Button onClick={() => discard()}>Discard</Button>
         </div>
       </div>
     );

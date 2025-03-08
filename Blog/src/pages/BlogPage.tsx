@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../services/api";
 import { useAuth } from "../context/AuthContext";
+import { X } from "lucide-react";
 
 interface BlogPost {
   id: string;
@@ -15,10 +16,24 @@ interface BlogPost {
 
 function BlogPage() {
   const { user } = useAuth();
+  const { token } = useAuth();
 
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [postsToShow, setPostsToShow] = useState(4);
+
+  const handleDelete = async (id: string) => {
+    if (!token) {
+      alert("You must be logged in to delete a blog");
+      return;
+    }
+    try {
+      const data = await api.deleteBlog(id, token);
+      console.log(data);
+    } catch (error) {
+      console.error("Error deleting blog:", error);
+    }
+  };
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -118,9 +133,18 @@ function BlogPage() {
                                   Published
                                 </span>
                               )}
-                              <Button className="text-[16px]" variant="ghost">
-                                Edit Post
-                              </Button>
+                              <Link to={`/edit-blog/${post.id}`}>
+                                <Button className="text-[16px]" variant="ghost">
+                                  Edit Post
+                                </Button>
+                              </Link>
+                              <button
+                                onClick={() => {
+                                  handleDelete(post.id);
+                                }}
+                              >
+                                <X className="text-red-500"></X>
+                              </button>
                             </div>
                           )}
                         </div>

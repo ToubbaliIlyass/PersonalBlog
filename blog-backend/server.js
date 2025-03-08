@@ -108,7 +108,41 @@ app.post("/api/blogs", authenticate, async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+app.put("/api/blogs/:id", authenticate, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, content, status, slug } = req.body;
 
+    const { data, error } = await supabase
+      .from("blogs")
+      .update({ title, content, status, slug })
+      .eq("id", id)
+      .single();
+
+    console.log("Update Query Result:", { data, error });
+
+    if (error) throw error;
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+app.delete("/api/blogs/:id", authenticate, async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const { data, error } = await supabase
+      .from("blogs")
+      .delete()
+      .eq("id", id)
+      .single();
+
+    if (error) throw error;
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 app.post("/api/email", async (req, res) => {
   try {
     const { email } = req.body;

@@ -10,6 +10,7 @@ import { AlertNotification } from "./components/Alert";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import Login from "./pages/LogIn.tsx";
 import CreateBlogPage from "./pages/CreateBlogPage.tsx";
+import EditBlogPage from "./pages/EditBlogPage.tsx";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user } = useAuth();
@@ -43,6 +44,14 @@ const App = () => {
                   <CreateBlogPage />
                 </ProtectedRoute>
               }
+            />
+            <Route 
+            path='/edit-blog/:id' 
+            element={
+              <ProtectedRoute>
+                <EditBlogPage />
+              </ProtectedRoute>
+            }
             />
             {/* <Route path="/about" element={<About />} /> */}
             <Route path="*" element={<NotFound />} />
