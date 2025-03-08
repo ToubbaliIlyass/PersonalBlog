@@ -143,6 +143,7 @@ app.delete("/api/blogs/:id", authenticate, async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 app.post("/api/email", async (req, res) => {
   try {
     const { email } = req.body;

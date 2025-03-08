@@ -129,7 +129,7 @@ function BlogPage() {
                               {post.status === "Draft" ? (
                                 <span className=" text-gray-500">Draft</span>
                               ) : (
-                                <span className="text-xs text-green-500">
+                                <span className=" text-green-500">
                                   Published
                                 </span>
                               )}

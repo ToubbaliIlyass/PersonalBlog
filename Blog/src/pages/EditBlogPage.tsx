@@ -101,6 +101,7 @@ const EditBlogPage = () => {
         );
       }
     }
+    navigate(`/blog/${blog.id}`);
   }
   const writingmode = () => (
     <div className="w-full mt-5 text-xl">
