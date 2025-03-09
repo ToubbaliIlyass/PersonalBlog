@@ -148,13 +148,13 @@ app.delete("/api/blogs/:id", authenticate, async (req, res) => {
 app.post("/api/email", async (req, res) => {
   try {
     const { email } = req.body;
+    console.log("Received email:", email);
 
     // Check if the email already exists in the 'emails' table
     const { data: existingEmail, error: checkError } = await supabase
       .from("emails")
       .select("email")
-      .eq("email", email)
-      .single(); // Only need one result
+      .eq("email", email); 
 
     if (checkError) {
       throw checkError;
