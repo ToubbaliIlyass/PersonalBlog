@@ -17,7 +17,7 @@ const Blog = () => {
   const [loading, setLoading] = useState(true);
   const postsToShow = 6;
   const scrollRef = useRef<HTMLDivElement>(null);
-    const { user } = useAuth();
+  const { user } = useAuth();
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -54,7 +54,7 @@ const Blog = () => {
 
   return (
     <>
-      <div className="container flex flex-col  p-7 mx-6 rounded-[40px]  items-center">
+      <div className="container h-[950px]  flex flex-col  p-7 mx-6 rounded-[40px]  items-center">
         <h1 className="text-5xl md:text-7xl font-bold font-special p-5">
           The story...
         </h1>
