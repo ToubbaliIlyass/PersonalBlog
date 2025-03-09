@@ -9,7 +9,7 @@ app.use(express.json()); // To parse JSON requests
 app.use(
   cors({
     origin: [
-      "https://personal-blog-t2usi8k7v-toubbaliilyass-projects.vercel.app",
+      "https://personal-blog-beryl-seven.vercel.app",
       "http://localhost:3000",
       "https://personalblog-production-1b15.up.railway.app", // Add your Railway URL
     ],
