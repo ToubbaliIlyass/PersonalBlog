@@ -154,7 +154,8 @@ app.post("/api/email", async (req, res) => {
     const { data: existingEmail, error: checkError } = await supabase
       .from("emails")
       .select("email")
-      .eq("email", email); 
+      .eq("email", email)
+      .single(); // Only need one result
 
     if (checkError) {
       throw checkError;
