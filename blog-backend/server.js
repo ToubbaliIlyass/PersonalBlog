@@ -144,40 +144,49 @@ app.delete("/api/blogs/:id", authenticate, async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
 app.post("/api/email", async (req, res) => {
   try {
     const { email } = req.body;
-    console.log("Received email:", email);
+    console.log("📩 Received email:", email);
 
-    // Check if the email already exists in the 'emails' table
+    // Ensure email is provided
+    if (!email) {
+      return res.status(400).json({ error: "Email is required" });
+    }
+
+    // Check if email already exists
     const { data: existingEmail, error: checkError } = await supabase
       .from("emails")
       .select("email")
       .eq("email", email)
-      .single(); // Only need one result
+      .maybeSingle(); // Use `maybeSingle()` to avoid unexpected errors
 
     if (checkError) {
-      throw checkError;
+      console.error("🔴 Supabase SELECT error:", checkError);
+      return res.status(500).json({ error: checkError.message });
     }
 
     if (existingEmail) {
-      return res.status(400).json({ error: "Email already exists" }); // Email already in the database
+      return res.status(400).json({ error: "Email already exists" });
     }
 
-    // Insert the email into the 'emails' table
+    // Insert email
     const { data, error } = await supabase
       .from("emails")
       .insert([{ email }])
-      .single(); // Insert one row and return the inserted data
+      .select()
+      .single(); // Fetch the inserted row
 
     if (error) {
-      throw error;
+      console.error("🔴 Supabase INSERT error:", error);
+      return res.status(500).json({ error: error.message });
     }
 
-    res.status(201).json(data); // Send back the inserted data
+    console.log("✅ Email inserted successfully:", data);
+    res.status(201).json(data);
   } catch (error) {
-    res.status(500).json({ error: error.message }); // Handle any server errors
+    console.error("🔥 Server error:", error);
+    res.status(500).json({ error: error.message });
   }
 });
 

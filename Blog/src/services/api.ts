@@ -97,5 +97,5 @@ export const api = {
   addemail: async (email: string) => {
     const response = await axios.post(`${API_URL}/api/email`, { email });
     return response.data;
-  },  
+},
 };
