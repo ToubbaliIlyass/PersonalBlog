@@ -6,19 +6,19 @@ const Footer = () => {
     {
       icon: FaYoutube,
       label: "YouTube",
-      href: "#",
+      href: "https://www.youtube.com/@IlyassToubbali",
       ariaLabel: "Visit our YouTube channel",
     },
     {
       icon: FaInstagram,
       label: "Instagram",
-      href: "#",
+      href: "https://www.instagram.com/ilyasstoubbali?igsh=aGdnNG83c2ttMmt2&utm_source=qr",
       ariaLabel: "Follow us on Instagram",
     },
     {
       icon: FaLinkedinIn,
       label: "LinkedIn",
-      href: "#",
+      href: "www.linkedin.com/in/ilyasstoubbali",
       ariaLabel: "Connect with us on LinkedIn",
     },
     {
