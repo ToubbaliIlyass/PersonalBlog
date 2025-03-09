@@ -35,6 +35,7 @@ const CreateBlogPage = () => {
 
     const slug = createSlug(title);
     console.log(slug, title, status);
+    console.log("Token being used:", token);
 
     try {
       const result = await api.createBlog(title, content, status, slug, token);

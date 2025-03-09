@@ -3,11 +3,13 @@ import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../services/api";
 import TypingEffect from "./TypingEffect";
+import { useAuth } from "@/context/AuthContext";
 interface BlogPost {
   id: string;
   title: string;
   content: string;
   created_at: string;
+  status: string;
 }
 
 const Blog = () => {
@@ -15,6 +17,7 @@ const Blog = () => {
   const [loading, setLoading] = useState(true);
   const postsToShow = 6;
   const scrollRef = useRef<HTMLDivElement>(null);
+    const { user } = useAuth();
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -32,6 +35,10 @@ const Blog = () => {
   }, []);
 
   const displayedPosts = blogs.slice(0, postsToShow);
+
+  const filteredPosts = user
+    ? displayedPosts
+    : displayedPosts.filter((post) => post.status === "Published");
 
   const scrollLeft = () => {
     if (scrollRef.current) {
@@ -110,7 +117,7 @@ const Blog = () => {
                   <TypingEffect strings={["Loading..."]}></TypingEffect>
                 </div>
               ) : (
-                displayedPosts.map((post) => (
+                filteredPosts.map((post) => (
                   <Link key={post.id} to={`/blog/${post.id}`}>
                     <BlogCard post={post} />
                   </Link>

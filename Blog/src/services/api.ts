@@ -14,24 +14,7 @@ export const api = {
     return response.data;
   },
 
-  // editBlog: async (id: string, title: string, content: string, status: string, slug: string, token: string) => {
-  //   if (!token) return;
-  //   console.log("Sending request with:", { id, title, content, status, slug, token });
-  //   try {
-  //     const response = await axios.put(`${API_URL}/api/blogs/${id}`, {
-  //       method: "PUT",
-  //       headers: {
-  //         "Authorization": `Bearer ${token}`,
-  //         "Content-Type": "application/json",
-  //       },        
-  //       body: JSON.stringify({ title, content, status, slug }),
-  //     });
-  //     console.log("Response status:", response.status);
-  //   }catch (error) {
-  //     console.error('Error creating blog:', error);
-  //     throw error;
-  //   }
-  //   },
+  
   editBlog: async (id: string, title: string, content: string, status: string, slug: string, token: string) => {
     if (!token) {
       throw new Error("Authentication token is required");
@@ -85,24 +68,31 @@ export const api = {
     }
   },  
   createBlog: async (title: string, content: string, status: string, slug: string, token: string) => {
+    if (!token) {
+      throw new Error("Authentication token is required");
+    }
     
-    if (!token) return;
     console.log("Sending request with:", { title, content, status, slug, token });
-    try {
-      const response = await axios.post(`${API_URL}/api/blogs`, {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ title, content, status, slug }),
-      });
-      console.log("Response status:", response.status);
   
-    }catch (error) {
-        console.error('Error creating blog:', error);
-        throw error;
-      }
+    try {
+      const response = await axios.post(
+        `${API_URL}/api/blogs`,
+        { title, content, status, slug }, // Request body
+        {
+          headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+  
+      console.log("Response status:", response.status);
+      return response.data;
+  
+    } catch (error) {
+      console.error('Error creating blog:', error);
+      throw error;
+    }
   },
   addemail: async (email: string) => {
     const response = await axios.post(`${API_URL}/api/email`, { email });

@@ -18,7 +18,7 @@ const Footer = () => {
     {
       icon: FaLinkedinIn,
       label: "LinkedIn",
-      href: "www.linkedin.com/in/ilyasstoubbali",
+      href: "https://www.linkedin.com/in/ilyasstoubbali",
       ariaLabel: "Connect with us on LinkedIn",
     },
     {
@@ -33,6 +33,7 @@ const Footer = () => {
       key={index}
       href={social.href}
       className="bg-[#F8F6F2] p-4 rounded-full hover:bg-[#f4a067] transition-colors duration-300 flex items-center justify-center"
+      target="_blank"
       aria-label={social.ariaLabel}
     >
       <social.icon className="text-black" />

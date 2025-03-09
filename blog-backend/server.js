@@ -108,6 +108,7 @@ app.post("/api/blogs", authenticate, async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 app.put("/api/blogs/:id", authenticate, async (req, res) => {
   try {
     const { id } = req.params;
